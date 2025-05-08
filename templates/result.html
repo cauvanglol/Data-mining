@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kết quả dự đoán</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        h3, h4 {
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            background-color: #f8f9fa;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Kết quả dự đoán sản phẩm & khuyến mãi</h1>
+
+        <h3>Loại sản phẩm dự đoán: {{ item_type }}</h3>
+
+        <h4>Danh sách sản phẩm gợi ý mua kèm:</h4>
+        <ul>
+            {% for item in suggested_item_types %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+
+        <h4>Thống kê doanh thu bán lẻ và tồn kho:</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Loại sản phẩm</th>
+                    <th>Doanh thu bán lẻ</th>
+                    <th>Doanh thu tồn kho</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in item_sales %}
+                    <tr>
+                        <td>{{ item['ITEM TYPE'] }}</td>
+                        <td>{{ item['RETAIL SALES'] }}</td>
+                        <td>{{ item['WAREHOUSE SALES'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h4>Sản phẩm nên được khuyến mãi: {{ promotion_item }}</h4>
+
+        <a href="/" class="btn">Trở lại trang nhập liệu</a>
+    </div>
+</body>
+</html>
